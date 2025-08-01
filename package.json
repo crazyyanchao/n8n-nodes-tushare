@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tushare",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "n8n custom node for Tushare",
   "keywords": [
     "n8n-community-node-package"
