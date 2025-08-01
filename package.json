@@ -1,22 +1,22 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-tushare",
   "version": "0.1.0",
   "description": "",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/crazyyanchao/n8n-nodes-tushare",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Tony.Ma",
+    "email": "yanchaoma@foxmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/crazyyanchao/n8n-nodes-tushare.git"
   },
   "engines": {
-    "node": ">=20.15"
+    "node": ">=22.16"
   },
   "main": "index.js",
   "scripts": {
@@ -42,12 +42,12 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "~8.32.0",
-    "eslint": "^8.57.0",
+    "@typescript-eslint/parser": "~8.36",
+    "eslint": "^8.57.1",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
-    "gulp": "^5.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "gulp": "^5.0.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
