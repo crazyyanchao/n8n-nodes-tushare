@@ -55,11 +55,11 @@ export class Tushare implements INodeType {
 								type: 'options',
 								options: [
 									{
-										name: 'JSON Dictionary',
+										name: 'JSON',
 										value: 'json',
 									},
 									{
-										name: 'Individual Parameters',
+										name: 'Individual',
 										value: 'individual',
 									},
 								],
@@ -67,10 +67,10 @@ export class Tushare implements INodeType {
 								description: 'Choose how to input parameters',
 							},
 							{
-								displayName: 'JSON Parameters',
+								displayName: 'Params',
 								name: 'jsonParams',
 								type: 'json',
-								default: '{}',
+								default: '{\n  "offset": 0,\n  "limit": 10\n}',
 								description: 'Parameters as JSON object',
 								displayOptions: {
 									show: {
@@ -79,13 +79,24 @@ export class Tushare implements INodeType {
 								},
 							},
 							{
-								displayName: 'Parameters',
+								displayName: 'Params',
 								name: 'individualParams',
 								type: 'fixedCollection',
 								typeOptions: {
 									multipleValues: true,
 								},
-								default: {},
+								default: {
+									parameter: [
+										{
+											key: 'offset',
+											value: '0',
+										},
+										{
+											key: 'limit',
+											value: '10',
+										},
+									],
+								},
 								description: 'Add parameters one by one',
 								displayOptions: {
 									show: {
