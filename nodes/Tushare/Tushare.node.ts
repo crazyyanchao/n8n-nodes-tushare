@@ -36,7 +36,7 @@ export class Tushare implements INodeType {
 				required: true,
 			},
 			{
-				displayName: 'Parameters',
+				displayName: 'Input Params',
 				name: 'params',
 				type: 'fixedCollection',
 				typeOptions: {
@@ -50,27 +50,81 @@ export class Tushare implements INodeType {
 						name: 'parameters',
 						values: [
 							{
-								displayName: 'Parameter Name',
-								name: 'name',
-								type: 'string',
-								default: '',
+								displayName: 'Input Mode',
+								name: 'inputMode',
+								type: 'options',
+								options: [
+									{
+										name: 'JSON Dictionary',
+										value: 'json',
+									},
+									{
+										name: 'Individual Parameters',
+										value: 'individual',
+									},
+								],
+								default: 'individual',
+								description: 'Choose how to input parameters',
 							},
 							{
-								displayName: 'Parameter Value',
-								name: 'value',
-								type: 'string',
-								default: '',
+								displayName: 'JSON Parameters',
+								name: 'jsonParams',
+								type: 'json',
+								default: '{}',
+								description: 'Parameters as JSON object',
+								displayOptions: {
+									show: {
+										inputMode: ['json'],
+									},
+								},
+							},
+							{
+								displayName: 'Parameters',
+								name: 'individualParams',
+								type: 'fixedCollection',
+								typeOptions: {
+									multipleValues: true,
+								},
+								default: {},
+								description: 'Add parameters one by one',
+								displayOptions: {
+									show: {
+										inputMode: ['individual'],
+									},
+								},
+								options: [
+									{
+										displayName: 'Parameter',
+										name: 'parameter',
+										values: [
+											{
+												displayName: 'Key',
+												name: 'key',
+												type: 'string',
+												default: '',
+												description: 'Parameter name',
+											},
+											{
+												displayName: 'Value',
+												name: 'value',
+												type: 'string',
+												default: '',
+												description: 'Parameter value',
+											},
+										],
+									},
+								],
 							},
 						],
 					},
 				],
 			},
 			{
-				displayName: 'Fields',
+				displayName: 'Return Fields',
 				name: 'fields',
 				type: 'string',
 				default: '',
-				placeholder: 'e.g., ts_code,name,area,industry',
+				placeholder: 'e.g., ts_code,name,area,industry...',
 				description: 'Comma-separated list of fields to return (leave empty for all fields)',
 			},
 			{
@@ -104,15 +158,34 @@ export class Tushare implements INodeType {
 					timeout?: number;
 				};
 				const paramsCollection = this.getNodeParameter('params', itemIndex, {}) as {
-					parameters?: Array<{ name: string; value: string }>;
+					parameters?: {
+						inputMode?: string;
+						jsonParams?: string;
+						individualParams?: {
+							parameter?: Array<{ key: string; value: string }>;
+						};
+					};
 				};
 
 				// Build parameters object
 				const params: Record<string, any> = {};
 				if (paramsCollection.parameters) {
-					for (const param of paramsCollection.parameters) {
-						if (param.name && param.value !== undefined) {
-							params[param.name] = param.value;
+					const { inputMode, jsonParams, individualParams } = paramsCollection.parameters;
+					
+					if (inputMode === 'json' && jsonParams) {
+						try {
+							const jsonParamsObj = JSON.parse(jsonParams);
+							Object.assign(params, jsonParamsObj);
+						} catch (error) {
+							throw new NodeOperationError(this.getNode(), 'Invalid JSON parameters', {
+								itemIndex,
+							});
+						}
+					} else if (inputMode === 'individual' && individualParams?.parameter) {
+						for (const param of individualParams.parameter) {
+							if (param.key && param.value !== undefined) {
+								params[param.key] = param.value;
+							}
 						}
 					}
 				}
