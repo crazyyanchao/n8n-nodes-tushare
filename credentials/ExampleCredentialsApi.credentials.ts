@@ -12,9 +12,8 @@ export class ExampleCredentialsApi implements ICredentialType {
 	documentationUrl = 'https://your-docs-url';
 
 	properties: INodeProperties[] = [
-		// The credentials to get from user and save encrypted.
-		// Properties can be defined exactly in the same way
-		// as node properties.
+		// 从用户获取并加密保存的凭据
+		// 属性可以以与节点属性完全相同的方式定义
 		{
 			displayName: 'User Name',
 			name: 'username',
@@ -32,9 +31,9 @@ export class ExampleCredentialsApi implements ICredentialType {
 		},
 	];
 
-	// This credential is currently not used by any node directly
-	// but the HTTP Request node can use it to make requests.
-	// The credential is also testable due to the `test` property below
+	// 此凭据目前没有被任何节点直接使用
+	// 但 HTTP Request 节点可以使用它来发出请求
+	// 由于下面的 `test` 属性，此凭据也是可测试的
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
@@ -43,13 +42,13 @@ export class ExampleCredentialsApi implements ICredentialType {
 				password: '={{ $credentials.password }}',
 			},
 			qs: {
-				// Send this as part of the query string
+				// 作为查询字符串的一部分发送
 				n8n: 'rocks',
 			},
 		},
 	};
 
-	// The block below tells how this credential can be tested
+	// 下面的块告诉如何测试此凭据
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: 'https://example.com/',

@@ -1,6 +1,6 @@
 import { INodeProperties } from 'n8n-workflow';
 
-// When the resource `httpVerb` is selected, this `operation` parameter will be shown.
+// 当选择资源 `httpVerb` 时，将显示此 `operation` 参数
 export const httpVerbOperations: INodeProperties[] = [
 	{
 		displayName: 'Operation',
@@ -43,8 +43,8 @@ export const httpVerbOperations: INodeProperties[] = [
 	},
 ];
 
-// Here we define what to show when the `get` operation is selected.
-// We do that by adding `operation: ["get"]` to `displayOptions.show`
+// 这里我们定义当选择 `get` 操作时显示什么
+// 我们通过在 `displayOptions.show` 中添加 `operation: ["get"]` 来实现
 const getOperation: INodeProperties[] = [
 	{
 		displayName: 'Type of Data',
@@ -114,8 +114,8 @@ const getOperation: INodeProperties[] = [
 	},
 ];
 
-// Here we define what to show when the DELETE Operation is selected.
-// We do that by adding `operation: ["delete"]` to `displayOptions.show`
+// 这里我们定义当选择 DELETE 操作时显示什么
+// 我们通过在 `displayOptions.show` 中添加 `operation: ["delete"]` 来实现
 const deleteOperation: INodeProperties[] = [
 	{
 		displayName: 'Type of Data',

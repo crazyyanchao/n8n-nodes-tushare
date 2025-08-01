@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tushare",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "n8n custom node for Tushare",
   "keywords": [
     "n8n-community-node-package"
@@ -34,11 +34,13 @@
     "n8nNodesApiVersion": 1,
     "credentials": [
       "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/HttpBinApi.credentials.js",
+      "dist/credentials/TushareApi.credentials.js"
     ],
     "nodes": [
       "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/HttpBin/HttpBin.node.js",
+      "dist/nodes/Tushare/Tushare.node.js"
     ]
   },
   "devDependencies": {

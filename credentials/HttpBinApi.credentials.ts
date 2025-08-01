@@ -27,10 +27,10 @@ export class HttpBinApi implements ICredentialType {
 		},
 	];
 
-	// This allows the credential to be used by other parts of n8n
-	// stating how this credential is injected as part of the request
-	// An example is the Http Request node that can make generic calls
-	// reusing this credential
+	// 这允许凭据被 n8n 的其他部分使用
+	// 说明此凭据如何作为请求的一部分被注入
+	// 一个例子是 Http Request 节点，它可以进行通用调用
+	// 重用此凭据
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
@@ -40,7 +40,7 @@ export class HttpBinApi implements ICredentialType {
 		},
 	};
 
-	// The block below tells how this credential can be tested
+	// 下面的块告诉如何测试此凭据
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: '={{$credentials?.domain}}',

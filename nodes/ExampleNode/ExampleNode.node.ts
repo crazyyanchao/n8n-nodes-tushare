@@ -20,8 +20,7 @@ export class ExampleNode implements INodeType {
 		outputs: [NodeConnectionType.Main],
 		usableAsTool: true,
 		properties: [
-			// Node properties which the user gets displayed and
-			// can change on the node.
+			// 节点属性，用户可以看到并可以修改
 			{
 				displayName: 'My String',
 				name: 'myString',
@@ -33,19 +32,17 @@ export class ExampleNode implements INodeType {
 		],
 	};
 
-	// The function below is responsible for actually doing whatever this node
-	// is supposed to do. In this case, we're just appending the `myString` property
-	// with whatever the user has entered.
-	// You can make async calls and use `await`.
+	// 下面的函数负责实际执行这个节点应该做的事情
+	// 在这个例子中，我们只是将用户输入的 `myString` 属性附加到数据中
+	// 你可以进行异步调用并使用 `await`
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 
 		let item: INodeExecutionData;
 		let myString: string;
 
-		// Iterates over all input items and add the key "myString" with the
-		// value the parameter "myString" resolves to.
-		// (This could be a different value for each item in case it contains an expression)
+		// 遍历所有输入项，并添加键 "myString"，值为参数 "myString" 解析后的值
+		// （如果包含表达式，每个项的值可能不同）
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
 			try {
 				myString = this.getNodeParameter('myString', itemIndex, '') as string;
@@ -53,15 +50,14 @@ export class ExampleNode implements INodeType {
 
 				item.json.myString = myString;
 			} catch (error) {
-				// This node should never fail but we want to showcase how
-				// to handle errors.
+				// 这个节点不应该失败，但我们想展示如何处理错误
 				if (this.continueOnFail()) {
 					items.push({ json: this.getInputData(itemIndex)[0].json, error, pairedItem: itemIndex });
 				} else {
-					// Adding `itemIndex` allows other workflows to handle this error
+					// 添加 `itemIndex` 允许其他工作流处理此错误
 					if (error.context) {
-						// If the error thrown already contains the context property,
-						// only append the itemIndex
+						// 如果抛出的错误已经包含 context 属性，
+						// 只附加 itemIndex
 						error.context.itemIndex = itemIndex;
 						throw error;
 					}

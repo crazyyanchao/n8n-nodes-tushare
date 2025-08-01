@@ -31,14 +31,14 @@ export class HttpBin implements INodeType {
 			},
 		},
 		/**
-		 * In the properties array we have two mandatory options objects required
+		 * 在属性数组中，我们有两个必需的选项对象
 		 *
-		 * [Resource & Operation]
+		 * [资源与操作]
 		 *
 		 * https://docs.n8n.io/integrations/creating-nodes/code/create-first-node/#resources-and-operations
 		 *
-		 * In our example, the operations are separated into their own file (HTTPVerbDescription.ts)
-		 * to keep this class easy to read.
+		 * 在我们的例子中，操作被分离到它们自己的文件中 (HTTPVerbDescription.ts)
+		 * 以保持这个类易于阅读。
 		 *
 		 */
 		properties: [
