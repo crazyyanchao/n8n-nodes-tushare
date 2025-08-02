@@ -1,9 +1,13 @@
 {
   "name": "n8n-nodes-tushare",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "n8n custom node for Tushare",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "tushare",
+    "financial-data",
+    "stock-data",
+    "china-market"
   ],
   "license": "MIT",
   "homepage": "https://github.com/crazyyanchao/n8n-nodes-tushare",
@@ -14,6 +18,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/crazyyanchao/n8n-nodes-tushare.git"
+  },
+  "bugs": {
+    "url": "https://github.com/crazyyanchao/n8n-nodes-tushare/issues"
   },
   "engines": {
     "node": ">=22.16"
@@ -33,13 +40,9 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js",
       "dist/credentials/TushareApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js",
       "dist/nodes/Tushare/Tushare.node.js"
     ]
   },
