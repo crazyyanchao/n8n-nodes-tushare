@@ -21,6 +21,8 @@ Tushare is a professional financial data platform that provides API services for
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
+Additionally, you can also refer to these [n8n workflow templates](https://github.com/crazyyanchao/n8n-workflow-template).
+
 ## Operations
 
 This node supports the following operations:

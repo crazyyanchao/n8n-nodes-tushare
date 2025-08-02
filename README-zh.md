@@ -21,6 +21,8 @@ Tushare是一个专业的金融数据平台，提供股票、基金、期货、�
 
 按照n8n社区节点文档中的[安装指南](https://docs.n8n.io/integrations/community-nodes/installation/)进行安装。
 
+另外，你也可以参考使用这些[n8n工作流模板](https://github.com/crazyyanchao/n8n-workflow-template)。
+
 ## 操作
 
 此节点支持以下操作：
