@@ -60,10 +60,7 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*",
-    "@langchain/community": "*",
     "@langchain/core": "*",
-    "@langchain/openai": "*",
-    "openai": "*",
     "zod": "*"
   }
 }

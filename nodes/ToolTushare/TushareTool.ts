@@ -2,7 +2,7 @@ import { DynamicStructuredTool } from '@langchain/core/tools';
 import { z } from 'zod';
 
 export interface TushareToolFields {
-	name: string; // 工具名称，也是 API名称
+	name: string; // 工具名称，也是Tushare API名称
 	description: string; // 工具描述
 	token: string; // 接口token
 	timeout?: number; // 超时时间
@@ -15,10 +15,8 @@ export interface TushareToolFields {
 	}>;
 }
 
-// @ts-ignore
-// cspell:ignore Tushare
-export class TushareTool extends DynamicStructuredTool<z.ZodObject<any>, any, any, string>  {
-  name: string;
+export class TushareTool extends DynamicStructuredTool<z.ZodObject<any>, any, any, string> {
+	name: string;
 	description: string;
 	token: string;
 	timeout: number;

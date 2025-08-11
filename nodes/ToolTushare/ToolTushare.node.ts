@@ -42,7 +42,7 @@ const PLACEHOLDER = `获取基金基本信息数据。
 查询平安银行基本信息，工具的查询入参为：
 {"cname_srch": "%平安银行%"}`
 
-export class ToolJsdata implements INodeType {
+export class ToolTushare implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Tool Tushare',
 		name: 'toolTushare',

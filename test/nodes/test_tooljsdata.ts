@@ -1,4 +1,4 @@
-import { JsdataTool } from '../../nodes/ToolJsdata/JsdataTool';
+import { TushareTool } from '../../nodes/ToolTushare/TushareTool';
 import { executeTool } from './executeTool';
 
 // 测试命令：npx ts-node test_tooljsdata.ts
@@ -18,7 +18,7 @@ const mockInput = {
 };
 
 // 创建 JsdataTool 实例
-const jsdataTool = new JsdataTool({
+const tushareTool = new TushareTool({
     name: testConfig.name,
     description: testConfig.desc,
     token: testConfig.token,
@@ -34,15 +34,15 @@ const jsdataTool = new JsdataTool({
 });
 
 // 测试函数
-async function testToolJsdataCall() {
+async function testToolTushareCall() {
     try {
-        console.log('开始测试 ToolJsdata...');
+        console.log('开始测试 ToolTushare...');
         console.log('测试配置:', testConfig);
         console.log('输入参数:', mockInput);
 
         // 测试 _call 方法
         console.log('\n测试 _call 方法...');
-        const result = await jsdataTool.invoke(mockInput);
+        const result = await tushareTool.invoke(mockInput);
 
         console.log('\n测试结果:');
         console.log('输出:', JSON.stringify(result, null, 2));
@@ -60,11 +60,11 @@ if (require.main === module) {
     //     console.error('测试执行失败:', error);
     // });
     const query = '{"code": "000001.SZ"}'
-    executeTool(jsdataTool, query).then(() => {
+    executeTool(tushareTool, query).then(() => {
         console.log('\n测试完成');
     }).catch((error) => {
         console.error('测试执行失败:', error);
     });
 }
 
-export { testToolJsdataCall, testConfig, mockInput };
+export { testToolTushareCall, testConfig, mockInput };

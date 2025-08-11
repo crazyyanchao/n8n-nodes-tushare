@@ -1,4 +1,4 @@
-import { JsdataTool } from '../../nodes/ToolJsdata/JsdataTool';
+import { TushareTool } from '../../nodes/ToolTushare/TushareTool';
 
 // 测试动态 schema 生成
 function testDynamicSchema() {
@@ -6,19 +6,19 @@ function testDynamicSchema() {
 
 	// 测试用例 1: 没有输入字段配置
 	console.log('测试用例 1: 没有输入字段配置');
-	const tool1 = new JsdataTool({
+	const tool1 = new TushareTool({
 		name: 'test_api_1',
 		description: '测试 API 1',
 		token: 'test_token',
 	});
-	
+
 	console.log('Schema:', tool1.getSchema().shape);
 	console.log('Schema 描述:', tool1.getSchema().description);
 	console.log('');
 
 	// 测试用例 2: 有输入字段配置
 	console.log('测试用例 2: 有输入字段配置');
-	const tool2 = new JsdataTool({
+	const tool2 = new TushareTool({
 		name: 'test_api_2',
 		description: '测试 API 2',
 		token: 'test_token',
@@ -63,7 +63,7 @@ function testDynamicSchema() {
 			limit: 20,
 			active: true,
 		};
-		
+
 		const result = tool2.getSchema().parse(validInput);
 		console.log('✅ 有效输入验证通过:', result);
 	} catch (error) {
@@ -76,7 +76,7 @@ function testDynamicSchema() {
 			start_date: '2024/01/01', // 错误的日期格式
 			limit: '20', // 应该是数字
 		};
-		
+
 		const result = tool2.getSchema().parse(invalidInput);
 		console.log('✅ 无效输入验证通过:', result);
 	} catch (error) {
