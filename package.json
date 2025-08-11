@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tushare",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "n8n custom node for Tushare",
   "keywords": [
     "n8n-community-node-package",
@@ -43,7 +43,8 @@
       "dist/credentials/TushareApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Tushare/Tushare.node.js"
+      "dist/nodes/Tushare/Tushare.node.js",
+      "dist/nodes/ToolTushare/ToolTushare.node.js"
     ]
   },
   "devDependencies": {
