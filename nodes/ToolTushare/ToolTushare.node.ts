@@ -420,7 +420,7 @@ export class ToolTushare implements INodeType {
 		const token = credentials.token as string;
 
 		// 创建工具描述
-		const description = toolDescription || 'Tushare data fetching tool';
+		const description = toolDescription || 'Data fetching tool';
 
 		// 获取用户配置的输入字段
 		let inputFields: any[] = [];
@@ -439,7 +439,7 @@ export class ToolTushare implements INodeType {
 			}
 		}
 
-		// 创建 TushareTool 实例
+		// 创建 DataTool 实例
 		const tool = new TushareTool({
 			name: apiName,
 			description,

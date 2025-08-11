@@ -1,8 +1,8 @@
-import { DynamicStructuredTool } from '@langchain/core/tools';
+import { Tool } from '@langchain/core/tools';
 import { z } from 'zod';
 
-export interface TushareToolFields {
-	name: string; // 工具名称，也是Tushare API名称
+export interface DataToolFields {
+	name: string; // 工具名称，也是Data API名称
 	description: string; // 工具描述
 	token: string; // 接口token
 	timeout?: number; // 超时时间
@@ -15,31 +15,24 @@ export interface TushareToolFields {
 	}>;
 }
 
-export class TushareTool extends DynamicStructuredTool<z.ZodObject<any>, any, any, string> {
+export class TushareTool extends Tool {
 	name: string;
 	description: string;
 	token: string;
 	timeout: number;
-	public schema: z.ZodObject<any>;
+	private customSchema: z.ZodObject<any>;
 
-	constructor(fields: TushareToolFields) {
+	constructor(fields: DataToolFields) {
 		// 动态生成 schema
 		const schema = TushareTool.generateSchema(fields.inputFields);
 
-		super({
-			name: fields.name,
-			description: fields.description,
-			schema: schema,
-			func: async (input: any) => {
-				return await this.processTushareRequest(input);
-			}
-		});
+		super();
 
 		this.name = fields.name;
 		this.description = fields.description;
 		this.token = fields.token;
 		this.timeout = fields.timeout || 30000;
-		this.schema = schema;
+		this.customSchema = schema;
 	}
 
 	/**
@@ -113,24 +106,39 @@ export class TushareTool extends DynamicStructuredTool<z.ZodObject<any>, any, an
 	 * 获取当前使用的 schema
 	 */
 	getSchema(): z.ZodObject<any> {
-		return this.schema;
+		return this.customSchema;
 	}
 
 	static lc_name(): string {
-		return 'TushareTool';
+		return 'DataTool';
 	}
 
 	get lc_namespace(): string[] {
-		return ['tushare', 'tools'];
+		return ['data', 'tools'];
 	}
 
 	/** @ignore */
-	protected async _call(arg: Record<string, any>): Promise<string> {
-		// console.log('arg', arg);
-		return await this.processTushareRequest(arg);
+	protected async _call(input: string): Promise<string> {
+		// 解析输入字符串为对象
+		let params: Record<string, any> = {};
+		try {
+			// 尝试解析为JSON
+			params = JSON.parse(input);
+		} catch {
+			// 如果不是JSON，尝试解析为查询字符串格式
+			if (input.includes('=')) {
+				const searchParams = new URLSearchParams(input);
+				params = Object.fromEntries(searchParams.entries());
+			} else if (input.trim()) {
+				// 如果只是单个值，可以作为一个参数
+				params = { query: input };
+			}
+		}
+
+		return await this.processDataRequest(params);
 	}
 
-	private async processTushareRequest(params: Record<string, any>): Promise<string> {
+	private async processDataRequest(params: Record<string, any>): Promise<string> {
 		try {
 			// 转义百分号字符，避免Python字符串格式化错误
 			const escapePercentSigns = (value: any): any => {
@@ -163,7 +171,7 @@ export class TushareTool extends DynamicStructuredTool<z.ZodObject<any>, any, an
 			};
 			// console.log('requestBody', JSON.stringify(requestBody));
 			// 发送 API 请求
-			const response = await fetch('http://api.tushare.pro', {
+			const response = await fetch('https://api.tushare.pro', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

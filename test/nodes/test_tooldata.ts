@@ -1,12 +1,12 @@
 import { TushareTool } from '../../nodes/ToolTushare/TushareTool';
 import { executeTool } from './executeTool';
 
-// 测试命令：npx ts-node test_tooljsdata.ts
+// 测试命令：npx ts-node test_tooldata.ts
 // 测试配置
 const testConfig = {
-    name: 'wd_a_desc',
+    name: 'stock_company',
     desc: '获取基金基本信息数据',
-    token: '1117be10554c6f4a70336aa737b0b470134c74497af5bf3ab265fec9',
+    token: '<TOKEN>',
     timeout: 30000
 };
 
@@ -17,8 +17,8 @@ const mockInput = {
     offset: 0
 };
 
-// 创建 JsdataTool 实例
-const tushareTool = new TushareTool({
+// 创建 dataTool 实例
+const dataTool = new TushareTool({
     name: testConfig.name,
     description: testConfig.desc,
     token: testConfig.token,
@@ -34,15 +34,15 @@ const tushareTool = new TushareTool({
 });
 
 // 测试函数
-async function testToolTushareCall() {
+async function testToolDataCall() {
     try {
-        console.log('开始测试 ToolTushare...');
+        console.log('开始测试 ToolData...');
         console.log('测试配置:', testConfig);
         console.log('输入参数:', mockInput);
 
         // 测试 _call 方法
         console.log('\n测试 _call 方法...');
-        const result = await tushareTool.invoke(mockInput);
+        const result = await dataTool.invoke(mockInput);
 
         console.log('\n测试结果:');
         console.log('输出:', JSON.stringify(result, null, 2));
@@ -54,17 +54,17 @@ async function testToolTushareCall() {
 
 // 运行测试
 if (require.main === module) {
-    // testToolJsdataCall().then(() => {
+    // testToolDataCall().then(() => {
     //     console.log('\n测试完成');
     // }).catch((error) => {
     //     console.error('测试执行失败:', error);
     // });
     const query = '{"code": "000001.SZ"}'
-    executeTool(tushareTool, query).then(() => {
+    executeTool(dataTool, query).then(() => {
         console.log('\n测试完成');
     }).catch((error) => {
         console.error('测试执行失败:', error);
     });
 }
 
-export { testToolTushareCall, testConfig, mockInput };
+export { testToolDataCall, testConfig, mockInput };
