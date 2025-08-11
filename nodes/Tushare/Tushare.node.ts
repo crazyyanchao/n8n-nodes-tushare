@@ -4,13 +4,14 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
-import { NodeConnectionType, NodeOperationError } from 'n8n-workflow';
+import { NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
 export class Tushare implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Tushare',
 		name: 'tushare',
 		icon: { light: 'file:tushare.svg', dark: 'file:tushare.svg' },
+		documentationUrl: 'https://api.tushare.pro',
 		group: ['transform'],
 		version: 1,
 		description: 'Interact with Tushare API',
@@ -23,8 +24,8 @@ export class Tushare implements INodeType {
 				required: true,
 			},
 		],
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		properties: [
 			{
 				displayName: 'API Name',
@@ -182,7 +183,7 @@ export class Tushare implements INodeType {
 				const params: Record<string, any> = {};
 				if (paramsCollection.parameters) {
 					const { inputMode, jsonParams, individualParams } = paramsCollection.parameters;
-					
+
 					if (inputMode === 'json' && jsonParams) {
 						try {
 							const jsonParamsObj = JSON.parse(jsonParams);
@@ -248,4 +249,4 @@ export class Tushare implements INodeType {
 
 		return [returnData];
 	}
-} 
+}

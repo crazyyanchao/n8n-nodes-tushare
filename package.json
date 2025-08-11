@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tushare",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "n8n custom node for Tushare",
   "keywords": [
     "n8n-community-node-package",
@@ -47,14 +47,22 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^24.2.1",
     "@typescript-eslint/parser": "~8.36",
     "eslint": "^8.57.1",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "gulp": "^5.0.1",
+    "n8n-workflow": "1.103.0",
     "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "*"
+    "n8n-workflow": "*",
+    "@langchain/community": "*",
+    "@langchain/core": "*",
+    "@langchain/openai": "*",
+    "openai": "*",
+    "zod": "*"
   }
 }
